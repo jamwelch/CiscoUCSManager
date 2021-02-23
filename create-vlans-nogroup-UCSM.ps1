@@ -22,7 +22,7 @@ Get-Host | Select-Object Version
 Import-Module Cisco.UCSManager
 
 #Login to UCS, saves login to  file in the location specified
-$DirPath = read-host -Prompt "Enter the path (i.e. c:\path) where you want the credential file created.  Delete the new folder and xml file once you are finished."
+$DirPath = read-host -Prompt "Enter the path (i.e. c:\path) where you want the credential file created."
 New-Item -ItemType Directory ucs-sessions -Force
 $UCSM_IP1 = read-host -Prompt "Enter the IP address of UCS Manager"
 Connect-Ucs $UCSM_IP1
