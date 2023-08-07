@@ -1,14 +1,27 @@
 #This script will prompt user from input deciding whether to modify TPM settings for UCSM servers or standalone C-Series servers via CIMC.
 #IMM servers are not supported by the script.
+
+#Check version of powershell
+Get-Host | Select-Object Version
+
+
 # Order of Operation 1. Decide on management mode. 2. Feed list of devices into script. 3. Start Loop operation to A. Connect to devices B. Test or Check devices current status. C. Modify devices as needed D. Produce Output for devices.
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #Choose Management Mode
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #UCSM Input
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #CIMC Input
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #UCSM Connect
+#Run this command first from powershell command line
+#Install-Module -Name Cisco.UCSManager 
+Import-Module Cisco.UCSManager
+
 #Login to UCS, saves login to  file in the location specified
 $DirPath = read-host -Prompt "Enter the path (i.e. c:\path) where you want the credential file created"
 New-Item -ItemType Directory ucs-sessions -Force
@@ -19,16 +32,25 @@ Export-UcsPSSession -Path $CredPath
 Disconnect-Ucs
 $handle = Connect-Ucs -Path $CredPath
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #CIMC Connect
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #UCSM Test
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #CIMC Test
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #UCSM Modify
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #CIMC Modify
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #UCSM Output
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
 #CIMC Output
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
