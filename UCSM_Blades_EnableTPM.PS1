@@ -164,7 +164,7 @@ foreach($SP in $SPList){
     Start-UcsTransaction
     Add-UcsServiceProfile -ModifyPresent -Name $SP -BiosProfileName $BPNewName
     Complete-UcsTransaction
-    Write-Host "Successfully modified " $SP
+    Write-Host "Successfully modified " + $SP
     Start-Sleep -Seconds 1.5
 }}
 # Servers should be prompted for reboot at this point to enforce changes in the Bios Policy
