@@ -17,6 +17,7 @@ Get-Host | Select-Object Version
 #Install-Module -Name Cisco.UCSManager 
 Import-Module Cisco.UCSManager
 
+$VlanGrp = read-host -Prompt "Enter the name of the new VLAN Group to be added to the vnic templates.  The VLAN Group should already be in UCS Manager LAN Cloud.  Do Not include the prefix 'VLAN Group '. This is automatically added."
 
 #Simple way to login to a single UCS domain and store login in a handle variable
 $UCSM_IP1 = read-host -Prompt "Enter the IP address of UCS Manager"
@@ -87,8 +88,8 @@ $selectedItems | ForEach-Object{
 		Write-Output "Removed" $_.Name
 		#Add VLAN Group
 		Start-UcsTransaction -Ucs $handle
-		$vnicTemplateObj | Add-UcsFabricNetGroupRef -ModifyPresent -Name "testjw"
-		Write-Output "VLAN Group 'testjw' added"
+		$vnicTemplateObj | Add-UcsFabricNetGroupRef -ModifyPresent -Name $VlanGrp
+		Write-Output "VLAN Group " $VlanGrp " added"
 	}
 }
 Complete-UcsTransaction -Ucs $handle
