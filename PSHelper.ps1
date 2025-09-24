@@ -9,10 +9,14 @@ param (
 )
 
 Write-Host "=== Step 1: Creating self-signed certificate ==="
+
 $cert = New-SelfSignedCertificate `
-    -Type CodeSigningCert `
-    -Subject "CN=Local PowerShell Code Signing" `
-    -CertStoreLocation Cert:\CurrentUser\My
+  -Type CodeSigningCert `
+  -Subject "CN=Local PowerShell Code Signing" `
+  -KeyUsage DigitalSignature `
+  -KeySpec Signature `
+  -CertStoreLocation Cert:\CurrentUser\My
+
 
 if (-not $cert) {
     Write-Error "Failed to create certificate."
